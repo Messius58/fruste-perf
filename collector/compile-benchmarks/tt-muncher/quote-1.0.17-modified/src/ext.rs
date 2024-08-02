@@ -7,7 +7,7 @@ use proc_macro2::{TokenStream, TokenTree};
 /// TokenStream extension trait with methods for appending tokens.
 ///
 /// This trait is sealed and cannot be implemented outside of the `quote` crate.
-pub trait TokenStreamExt: private::Sealed {
+pub trait TokenStreamExt: privee::Sealed {
     /// For use by `ToTokens` implementations.
     ///
     /// Appends the token specified to this list of tokens.
@@ -103,7 +103,7 @@ impl TokenStreamExt for TokenStream {
     }
 }
 
-mod private {
+mod privee {
     use proc_macro2::TokenStream;
 
     pub trait Sealed {}

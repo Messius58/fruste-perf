@@ -3356,7 +3356,7 @@ pub(crate) mod printing {
     impl ToTokens for ExprPath {
         fn to_tokens(&self, tokens: &mut TokenStream) {
             outer_attrs_to_tokens(&self.attrs, tokens);
-            private::print_path(tokens, &self.qself, &self.path);
+            privee::print_path(tokens, &self.qself, &self.path);
         }
     }
 

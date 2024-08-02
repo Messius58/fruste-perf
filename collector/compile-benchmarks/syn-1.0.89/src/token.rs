@@ -88,7 +88,7 @@
 //! [Printing]: https://docs.rs/quote/1.0/quote/trait.ToTokens.html
 //! [`Span`]: https://docs.rs/proc-macro2/1.0/proc_macro2/struct.Span.html
 
-use self::private::WithSpan;
+use self::privee::WithSpan;
 #[cfg(feature = "parsing")]
 use crate::buffer::Cursor;
 #[cfg(feature = "parsing")]
@@ -123,7 +123,7 @@ use std::ops::{Deref, DerefMut};
 ///
 /// This trait is sealed and cannot be implemented for types outside of Syn.
 #[cfg(feature = "parsing")]
-pub trait Token: private::Sealed {
+pub trait Token: privee::Sealed {
     // Not public API.
     #[doc(hidden)]
     fn peek(cursor: Cursor) -> bool;
@@ -133,7 +133,7 @@ pub trait Token: private::Sealed {
     fn display() -> &'static str;
 }
 
-mod private {
+mod privee {
     use proc_macro2::Span;
 
     #[cfg(feature = "parsing")]
@@ -148,7 +148,7 @@ mod private {
 }
 
 #[cfg(feature = "parsing")]
-impl private::Sealed for Ident {}
+impl privee::Sealed for Ident {}
 
 #[cfg(feature = "parsing")]
 fn peek_impl(cursor: Cursor, peek: fn(ParseStream) -> bool) -> bool {
@@ -179,7 +179,7 @@ macro_rules! impl_token {
         }
 
         #[cfg(feature = "parsing")]
-        impl private::Sealed for $name {}
+        impl privee::Sealed for $name {}
     };
 }
 
@@ -208,7 +208,7 @@ macro_rules! impl_low_level_token {
         }
 
         #[cfg(feature = "parsing")]
-        impl private::Sealed for $ty {}
+        impl privee::Sealed for $ty {}
     };
 }
 
@@ -225,7 +225,7 @@ pub trait CustomToken {
 }
 
 #[cfg(feature = "parsing")]
-impl<T: CustomToken> private::Sealed for T {}
+impl<T: CustomToken> privee::Sealed for T {}
 
 #[cfg(feature = "parsing")]
 impl<T: CustomToken> Token for T {
@@ -335,7 +335,7 @@ macro_rules! define_keywords {
             }
 
             #[cfg(feature = "parsing")]
-            impl private::Sealed for $name {}
+            impl privee::Sealed for $name {}
         )*
     };
 }
@@ -470,7 +470,7 @@ macro_rules! define_punctuation {
             }
 
             #[cfg(feature = "parsing")]
-            impl private::Sealed for $name {}
+            impl privee::Sealed for $name {}
         )*
     };
 }
@@ -548,7 +548,7 @@ macro_rules! define_delimiters {
             }
 
             #[cfg(feature = "parsing")]
-            impl private::Sealed for $name {}
+            impl privee::Sealed for $name {}
         )*
     };
 }
@@ -603,7 +603,7 @@ impl Token for Underscore {
 }
 
 #[cfg(feature = "parsing")]
-impl private::Sealed for Underscore {}
+impl privee::Sealed for Underscore {}
 
 #[cfg(feature = "parsing")]
 impl Token for Paren {

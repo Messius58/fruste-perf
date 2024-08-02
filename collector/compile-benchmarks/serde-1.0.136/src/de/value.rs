@@ -23,7 +23,7 @@
 
 use lib::*;
 
-use self::private::{First, Second};
+use self::privee::{First, Second};
 use __private::size_hint;
 use de::{self, Deserializer, Expected, IntoDeserializer, SeqAccess, Visitor};
 use ser;
@@ -354,13 +354,13 @@ where
     E: de::Error,
 {
     type Error = E;
-    type Variant = private::UnitOnly<E>;
+    type Variant = privee::UnitOnly<E>;
 
     fn variant_seed<T>(self, seed: T) -> Result<(T::Value, Self::Variant), Self::Error>
     where
         T: de::DeserializeSeed<'de>,
     {
-        seed.deserialize(self).map(private::unit_only)
+        seed.deserialize(self).map(privee::unit_only)
     }
 }
 
@@ -436,13 +436,13 @@ where
     E: de::Error,
 {
     type Error = E;
-    type Variant = private::UnitOnly<E>;
+    type Variant = privee::UnitOnly<E>;
 
     fn variant_seed<T>(self, seed: T) -> Result<(T::Value, Self::Variant), Self::Error>
     where
         T: de::DeserializeSeed<'de>,
     {
-        seed.deserialize(self).map(private::unit_only)
+        seed.deserialize(self).map(privee::unit_only)
     }
 }
 
@@ -515,13 +515,13 @@ where
     E: de::Error,
 {
     type Error = E;
-    type Variant = private::UnitOnly<E>;
+    type Variant = privee::UnitOnly<E>;
 
     fn variant_seed<T>(self, seed: T) -> Result<(T::Value, Self::Variant), Self::Error>
     where
         T: de::DeserializeSeed<'de>,
     {
-        seed.deserialize(self).map(private::unit_only)
+        seed.deserialize(self).map(privee::unit_only)
     }
 }
 
@@ -609,13 +609,13 @@ where
     E: de::Error,
 {
     type Error = E;
-    type Variant = private::UnitOnly<E>;
+    type Variant = privee::UnitOnly<E>;
 
     fn variant_seed<T>(self, seed: T) -> Result<(T::Value, Self::Variant), Self::Error>
     where
         T: de::DeserializeSeed<'de>,
     {
-        seed.deserialize(self).map(private::unit_only)
+        seed.deserialize(self).map(privee::unit_only)
     }
 }
 
@@ -707,13 +707,13 @@ where
     E: de::Error,
 {
     type Error = E;
-    type Variant = private::UnitOnly<E>;
+    type Variant = privee::UnitOnly<E>;
 
     fn variant_seed<T>(self, seed: T) -> Result<(T::Value, Self::Variant), Self::Error>
     where
         T: de::DeserializeSeed<'de>,
     {
-        seed.deserialize(self).map(private::unit_only)
+        seed.deserialize(self).map(privee::unit_only)
     }
 }
 
@@ -1039,7 +1039,7 @@ where
 pub struct MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
 {
     iter: iter::Fuse<I>,
     value: Option<Second<I::Item>>,
@@ -1051,7 +1051,7 @@ where
 impl<'de, I, E> MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
 {
     /// Construct a new `MapDeserializer<I, E>`.
     pub fn new(iter: I) -> Self {
@@ -1068,7 +1068,7 @@ where
 impl<'de, I, E> MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
     E: de::Error,
 {
     /// Check for remaining elements after passing a `MapDeserializer` to
@@ -1091,13 +1091,13 @@ where
 impl<'de, I, E> MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
 {
     fn next_pair(&mut self) -> Option<(First<I::Item>, Second<I::Item>)> {
         match self.iter.next() {
             Some(kv) => {
                 self.count += 1;
-                Some(private::Pair::split(kv))
+                Some(privee::Pair::split(kv))
             }
             None => None,
         }
@@ -1107,7 +1107,7 @@ where
 impl<'de, I, E> de::Deserializer<'de> for MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
     First<I::Item>: IntoDeserializer<'de, E>,
     Second<I::Item>: IntoDeserializer<'de, E>,
     E: de::Error,
@@ -1150,7 +1150,7 @@ where
 impl<'de, I, E> de::MapAccess<'de> for MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
     First<I::Item>: IntoDeserializer<'de, E>,
     Second<I::Item>: IntoDeserializer<'de, E>,
     E: de::Error,
@@ -1208,7 +1208,7 @@ where
 impl<'de, I, E> de::SeqAccess<'de> for MapDeserializer<'de, I, E>
 where
     I: Iterator,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
     First<I::Item>: IntoDeserializer<'de, E>,
     Second<I::Item>: IntoDeserializer<'de, E>,
     E: de::Error,
@@ -1237,7 +1237,7 @@ where
 impl<'de, I, E> Clone for MapDeserializer<'de, I, E>
 where
     I: Iterator + Clone,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
     Second<I::Item>: Clone,
 {
     fn clone(&self) -> Self {
@@ -1254,7 +1254,7 @@ where
 impl<'de, I, E> Debug for MapDeserializer<'de, I, E>
 where
     I: Iterator + Debug,
-    I::Item: private::Pair,
+    I::Item: privee::Pair,
     Second<I::Item>: Debug,
 {
     fn fmt(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -1451,14 +1451,14 @@ where
     A: de::MapAccess<'de>,
 {
     type Error = A::Error;
-    type Variant = private::MapAsEnum<A>;
+    type Variant = privee::MapAsEnum<A>;
 
     fn variant_seed<T>(mut self, seed: T) -> Result<(T::Value, Self::Variant), Self::Error>
     where
         T: de::DeserializeSeed<'de>,
     {
         match self.map.next_key_seed(seed)? {
-            Some(key) => Ok((key, private::map_as_enum(self.map))),
+            Some(key) => Ok((key, privee::map_as_enum(self.map))),
             None => Err(de::Error::invalid_type(de::Unexpected::Map, &"enum")),
         }
     }
@@ -1466,7 +1466,7 @@ where
 
 ////////////////////////////////////////////////////////////////////////////////
 
-mod private {
+mod privee {
     use lib::*;
 
     use de::{self, DeserializeSeed, Deserializer, MapAccess, Unexpected, VariantAccess, Visitor};

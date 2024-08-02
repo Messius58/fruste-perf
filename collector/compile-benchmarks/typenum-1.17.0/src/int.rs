@@ -30,7 +30,7 @@ pub use crate::marker_traits::Integer;
 use crate::{
     bit::{Bit, B0, B1},
     consts::{N1, P1, U0, U1},
-    private::{Internal, InternalMarker, PrivateDivInt, PrivateIntegerAdd, PrivateRem},
+    privee::{Internal, InternalMarker, PrivateDivInt, PrivateIntegerAdd, PrivateRem},
     uint::{UInt, Unsigned},
     Cmp, Equal, Greater, Less, NonZero, Pow, PowerOfTwo, ToInt, Zero,
 };

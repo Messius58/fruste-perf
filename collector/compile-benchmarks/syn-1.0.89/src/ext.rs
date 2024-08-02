@@ -15,7 +15,7 @@ use proc_macro2::Ident;
 /// is implemented only for `proc_macro2::Ident`.
 ///
 /// *This trait is available only if Syn is built with the `"parsing"` feature.*
-pub trait IdentExt: Sized + private::Sealed {
+pub trait IdentExt: Sized + privee::Sealed {
     /// Parses any identifier including keywords.
     ///
     /// This is useful when parsing macro input which allows Rust keywords as
@@ -54,7 +54,7 @@ pub trait IdentExt: Sized + private::Sealed {
     /// This is different from `input.peek(Ident)` which only returns true in
     /// the case of an ident which is not a Rust keyword.
     #[allow(non_upper_case_globals)]
-    const peek_any: private::PeekFn = private::PeekFn;
+    const peek_any: privee::PeekFn = privee::PeekFn;
 
     /// Strips the raw marker `r#`, if any, from the beginning of an ident.
     ///
@@ -104,11 +104,11 @@ impl IdentExt for Ident {
     }
 }
 
-impl Peek for private::PeekFn {
-    type Token = private::IdentAny;
+impl Peek for privee::PeekFn {
+    type Token = privee::IdentAny;
 }
 
-impl CustomToken for private::IdentAny {
+impl CustomToken for privee::IdentAny {
     fn peek(cursor: Cursor) -> bool {
         cursor.ident().is_some()
     }
@@ -118,9 +118,9 @@ impl CustomToken for private::IdentAny {
     }
 }
 
-impl lookahead::Sealed for private::PeekFn {}
+impl lookahead::Sealed for privee::PeekFn {}
 
-mod private {
+mod privee {
     use proc_macro2::Ident;
 
     pub trait Sealed {}

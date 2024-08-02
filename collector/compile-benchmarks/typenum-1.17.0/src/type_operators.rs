@@ -1,7 +1,7 @@
 //! Useful **type operators** that are not defined in `core::ops`.
 
 use crate::{
-    private::{Internal, InternalMarker},
+    privee::{Internal, InternalMarker},
     Bit, NInt, NonZero, PInt, UInt, UTerm, Unsigned, Z0,
 };
 
@@ -358,7 +358,7 @@ pub trait IsLess<Rhs = Self> {
     fn is_less(self, rhs: Rhs) -> Self::Output;
 }
 
-use crate::private::IsLessPrivate;
+use crate::privee::IsLessPrivate;
 impl<A, B> IsLess<B> for A
 where
     A: Cmp<B> + IsLessPrivate<B, Compare<A, B>>,
@@ -380,7 +380,7 @@ pub trait IsEqual<Rhs = Self> {
     fn is_equal(self, rhs: Rhs) -> Self::Output;
 }
 
-use crate::private::IsEqualPrivate;
+use crate::privee::IsEqualPrivate;
 impl<A, B> IsEqual<B> for A
 where
     A: Cmp<B> + IsEqualPrivate<B, Compare<A, B>>,
@@ -402,7 +402,7 @@ pub trait IsGreater<Rhs = Self> {
     fn is_greater(self, rhs: Rhs) -> Self::Output;
 }
 
-use crate::private::IsGreaterPrivate;
+use crate::privee::IsGreaterPrivate;
 impl<A, B> IsGreater<B> for A
 where
     A: Cmp<B> + IsGreaterPrivate<B, Compare<A, B>>,
@@ -424,7 +424,7 @@ pub trait IsLessOrEqual<Rhs = Self> {
     fn is_less_or_equal(self, rhs: Rhs) -> Self::Output;
 }
 
-use crate::private::IsLessOrEqualPrivate;
+use crate::privee::IsLessOrEqualPrivate;
 impl<A, B> IsLessOrEqual<B> for A
 where
     A: Cmp<B> + IsLessOrEqualPrivate<B, Compare<A, B>>,
@@ -446,7 +446,7 @@ pub trait IsNotEqual<Rhs = Self> {
     fn is_not_equal(self, rhs: Rhs) -> Self::Output;
 }
 
-use crate::private::IsNotEqualPrivate;
+use crate::privee::IsNotEqualPrivate;
 impl<A, B> IsNotEqual<B> for A
 where
     A: Cmp<B> + IsNotEqualPrivate<B, Compare<A, B>>,
@@ -468,7 +468,7 @@ pub trait IsGreaterOrEqual<Rhs = Self> {
     fn is_greater_or_equal(self, rhs: Rhs) -> Self::Output;
 }
 
-use crate::private::IsGreaterOrEqualPrivate;
+use crate::privee::IsGreaterOrEqualPrivate;
 impl<A, B> IsGreaterOrEqual<B> for A
 where
     A: Cmp<B> + IsGreaterOrEqualPrivate<B, Compare<A, B>>,

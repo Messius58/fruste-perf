@@ -30,7 +30,7 @@
 use crate::{
     bit::{Bit, B0, B1},
     consts::{U0, U1},
-    private::{
+    privee::{
         BitDiff, BitDiffOut, Internal, InternalMarker, PrivateAnd, PrivateAndOut, PrivateCmp,
         PrivateCmpOut, PrivateLogarithm2, PrivatePow, PrivatePowOut, PrivateSquareRoot, PrivateSub,
         PrivateSubOut, PrivateXor, PrivateXorOut, Trim, TrimOut,
@@ -1283,7 +1283,7 @@ where
 
 // ---------------------------------------------------------------------------------------
 // Shifting one number until it's the size of another
-use crate::private::ShiftDiff;
+use crate::privee::ShiftDiff;
 impl<Ul: Unsigned, Ur: Unsigned> ShiftDiff<Ur> for Ul
 where
     Ur: BitDiff<Ul>,
@@ -1540,7 +1540,7 @@ pub trait SetBit<I, B> {
 /// Alias for the result of calling `SetBit`: `SetBitOut<N, I, B> = <N as SetBit<I, B>>::Output`.
 pub type SetBitOut<N, I, B> = <N as SetBit<I, B>>::Output;
 
-use crate::private::{PrivateSetBit, PrivateSetBitOut};
+use crate::privee::{PrivateSetBit, PrivateSetBitOut};
 
 // Call private one then trim it
 impl<N, I, B> SetBit<I, B> for N
@@ -1741,7 +1741,7 @@ where
 
 // -----------------------------------------
 // PrivateDiv
-use crate::private::{PrivateDiv, PrivateDivQuot, PrivateDivRem};
+use crate::privee::{PrivateDiv, PrivateDivQuot, PrivateDivRem};
 
 use crate::Compare;
 // R == 0: We set R = UInt<UTerm, N[i]>, then call out to PrivateDivIf for the if statement
@@ -1855,7 +1855,7 @@ where
 // -----------------------------------------
 // PrivateDivIf
 
-use crate::private::{PrivateDivIf, PrivateDivIfQuot, PrivateDivIfRem};
+use crate::privee::{PrivateDivIf, PrivateDivIfQuot, PrivateDivIfRem};
 
 // R < D, I > 0, we do nothing and recurse
 impl<N, D, Q, R, Ui, Bi> PrivateDivIf<N, D, Q, R, UInt<Ui, Bi>, Less> for ()
@@ -2066,7 +2066,7 @@ where
 
 // -----------------------------------------
 // PrivateMin
-use crate::private::{PrivateMin, PrivateMinOut};
+use crate::privee::{PrivateMin, PrivateMinOut};
 
 impl<U, B, Ur> PrivateMin<Ur, Equal> for UInt<U, B>
 where
@@ -2138,7 +2138,7 @@ where
 
 // -----------------------------------------
 // PrivateMax
-use crate::private::{PrivateMax, PrivateMaxOut};
+use crate::privee::{PrivateMax, PrivateMaxOut};
 
 impl<U, B, Ur> PrivateMax<Ur, Equal> for UInt<U, B>
 where
